@@ -22,27 +22,6 @@ from PIL import ImageOps
 # For measuring the inference time.
 #import paho.mqtt.client as mqtt # Import the MQTT library
 import time # The time library is useful for delays
-
-
-# Our "on message" event
-#def messageFunction (client, userdata, message):
-#    topic = str(message.topic)
-
-#    message = str(message.payload.decode("utf-8"))
-
-#    print(topic + message)
-
-#myClient = mqtt.Client("IoT-lab7-40733939486b") # Create a MQTT client object
-
-#myClient.connect("test.mosquitto.org", 1883) # Connect to the test MQTT broker
-
-#myClient.subscribe("outTopicDaniel2") # Subscribe to the topic AC_unit
-
-#myClient.on_message = messageFunction # Attach the messageFunction to subscription
-
-#myClient.loop_start() # Start the MQTT client
-
-
 import paho.mqtt.client as mqtt
 
 # The callback for when the client receives a CONNACK response from the server.

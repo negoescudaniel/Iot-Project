@@ -196,9 +196,6 @@ def run_detector(detector, path):
 
   print("Found %d objects." % len(result["detection_scores"]))
   print("Inference time: ", end_time-start_time)
-  # print(result)
-  # parse x:
-  #y = json.loads(result)
 
   # the result is a Python dictionary:
   print(result["detection_class_entities"])
@@ -221,17 +218,10 @@ def run_detector(detector, path):
       print("The array does not contain any animal-related elements.")
       mqttc.publish("inTopicDaniel2","0")
   
-  #image_with_boxes = draw_boxes(
-   #   img.numpy(), result["detection_boxes"],
-  #    result["detection_class_entities"], result["detection_scores"])
-
- # display_image(image_with_boxes)
 
 def show_image(path):
 	image = Image.open(path)
 	image.show()
-
-#image_url = "https://upload.wikimedia.org/wikipedia/commons/6/60/Naxos_Taverna.jpg" 
 
 while(1):
 	#Fill in the IP of the ESP32-CAM board
@@ -244,7 +234,6 @@ while(1):
 	#module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"  #high accuracy
 
 	detector = hub.load(module_handle).signatures['default']
-	print("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+	print("Image is ready to be scanned for animal related objects!")
 	run_detector(detector, downloaded_image_path)
-	print("SSSSSSSSSSSSSSSssssssssssssss")
 	time.sleep(5)

@@ -212,14 +212,15 @@ void setup() {
 }
 
 void loop() {
-  // Do nothing. Everything is done in another task by the web server
-  //delay(10000);
+  
   if (!client.connected()) {
     reconnect();
   }
   client.loop();
 
   unsigned long now = millis();
+
+  //Publishing messages for testing purposes
   if (now - lastMsg > 2000) {
     lastMsg = now;
     ++value;

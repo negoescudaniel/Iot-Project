@@ -1,68 +1,68 @@
-ESP32-CAM with Web Server, MQTT Communication, and Animal Detection Control System
+# ESP32-CAM with Web Server, MQTT Communication, and Animal Detection Control System
 
-Project Overview
+## Project Overview
 
-This project uses two ESP32 modules in a cooperative system to monitor for animals using image detection, control a water valve for refilling a bowl, and manage sensors for environmental monitoring:
+This project utilizes two ESP32 modules in a cooperative system to detect animals, control a water valve for bowl refilling, and monitor environmental sensors. The system is structured as follows:
 
+- **ESP32-CAM**: Hosts a web server to capture images and communicate animal detection results.
+- **ESP32 Controller**: Manages motion detection, water level monitoring, and controls a servo motor to regulate a water valve based on detected conditions.
 
-ESP32-CAM:
+---
 
--Hosts a web server to capture images every 5 seconds.
+## System Architecture
 
--A Python script running on a computer accesses the web server, captures images, and analyzes them using TensorFlow to detect animals.
+### ESP32-CAM
+- **Web Server**: Hosts live image captures, accessible by a Python script running on a computer.
+- **Image Processing**: A Python script captures images every 5 seconds, analyzes them using TensorFlow to detect animals.
+- **MQTT Communication**: The Python script sends a control signal (`1` or `0`) to the ESP32-CAM via MQTT, based on detection status, which is then forwarded to the controller ESP32.
 
--Based on detection, the Python script sends a control signal (1 or 0) to the ESP32-CAM via MQTT, indicating the presence or absence of animals.
+### ESP32 Controller
+- **MQTT Subscriber**: Receives animal detection signals from the ESP32-CAM.
+- **PIR Motion Sensor**: Detects local movement near the water bowl.
+- **Water Level Sensor**: Monitors the water level to ensure the bowl is adequately filled.
+- **Servo Motor**: Controls the water valve to refill the bowl based on animal presence, motion detection, and water level.
 
--The ESP32-CAM forwards the detection result to another ESP32 (controller) via MQTT.
+---
 
+## Features
 
-ESP32 (Controller):
+- **Image Capture**: ESP32-CAM captures images every 5 seconds and hosts them on a web server.
+- **Animal Detection**: Python-based image analysis using TensorFlow to detect animals.
+- **MQTT Communication**: Enables efficient data exchange between the ESP32-CAM, the Python script, and the controller ESP32.
+- **Conditional Water Dispensing**: The controller ESP32 dispenses water when both animal presence and motion are detected, while also monitoring water levels.
 
--Monitors a motion sensor (PIR) and water level sensor.
+---
 
--Controls a servo motor that regulates the water valve for filling the bowl.
+## Hardware Components
 
--The valve is opened when animals are detected AND motion is detected, ensuring that water is only dispensed when necessary, based on the water level.
+- **ESP32-CAM**: Hosts a web server for image capture and communicates detection results.
+- **ESP32 Controller**: Controls the water valve, monitors sensors, and processes MQTT messages.
+- **PIR Motion Sensor**: Detects nearby movement around the water bowl.
+- **Water Level Sensor**: Tracks the water level in the bowl to prevent overflow.
+- **Servo Motor**: Regulates the water valve, allowing refilling when conditions are met.
+- **Power Supply**: Ensures continuous operation of both ESP32 modules and connected sensors.
 
+---
 
-System Architecture
+## Code Functionality
 
-ESP32-CAM:
+- **ESP32-CAM Web Server**: Captures images accessible via a web browser or the Python script.
+- **Python Script**:
+  - Connects to the ESP32-CAM web server to retrieve images every 5 seconds.
+  - Uses TensorFlow to analyze images and detect animals.
+  - Sends an MQTT signal to the ESP32-CAM indicating the detection result (`1` for presence, `0` for absence).
+- **ESP32 Controller Logic**:
+  - Receives the animal detection signal from the ESP32-CAM.
+  - Monitors the PIR motion sensor and water level sensor.
+  - Opens the water valve if an animal is detected, motion is sensed, and the water level is low.
 
--Web server hosts live image captures accessible by the Python script.
+---
 
--MQTT Publisher/Subscriber for communicating with the controller ESP32 and receiving detection results from the Python script.
+## Possible Future Improvements
 
+- **Edge Processing**: Implement TensorFlow Lite on the ESP32-CAM for local, on-device image processing to reduce dependency on external Python processing.
+- **Enhanced Control**: Integrate additional sensor feedback for finer control of the water valve and water dispensing system.
+- **Web Dashboard**: Develop a web-based interface to monitor real-time sensor data, view detection results, and manually control the water valve.
 
-ESP32 Controller:
-
--MQTT Subscriber to receive animal detection signals from the ESP32-CAM.
-
--PIR Motion Sensor to detect local movement.
-
--Water Level Sensor to check the current water level in the bowl.
-
--Servo Motor controls the water valve to refill the bowl based on the water level and detection criteria.
-
-
-Features
-
--Image capture via ESP32-CAM web server every 5 seconds.
-
--Python-based image analysis for detecting animals using TensorFlow.
-
--MQTT Communication between the ESP32-CAM, Python script, and controller ESP32 for decision-making.
-
--Motion detection and water level monitoring on the controller ESP32 to manage the water valve.
-
--Automatic water dispensing based on both animal presence and local motion detection.
-
-
-Possible Future Improvements
-
--Edge Processing: Implement TensorFlow Lite on the ESP32-CAM for local image processing.
-
--Enhanced Control: Introduce additional sensor feedback for more precise control of the water valve.
-
--Web Dashboard: Add a web-based interface to monitor sensor data, animal detection results, and manually control the water valve.
+---
 

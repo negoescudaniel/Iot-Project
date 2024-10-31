@@ -7,7 +7,6 @@ This project utilizes two ESP32 modules in a cooperative system to detect animal
 - **ESP32-CAM**: Hosts a web server to capture images and communicate animal detection results.
 - **ESP32 Controller**: Manages motion detection, water level monitoring, and controls a servo motor to regulate a water valve based on detected conditions.
 
----
 
 ## System Architecture
 
@@ -22,7 +21,6 @@ This project utilizes two ESP32 modules in a cooperative system to detect animal
 - **Water Level Sensor**: Monitors the water level to ensure the bowl is adequately filled.
 - **Servo Motor**: Controls the water valve to refill the bowl based on animal presence, motion detection, and water level.
 
----
 
 ## Features
 
@@ -31,7 +29,6 @@ This project utilizes two ESP32 modules in a cooperative system to detect animal
 - **MQTT Communication**: Enables efficient data exchange between the ESP32-CAM, the Python script, and the controller ESP32.
 - **Conditional Water Dispensing**: The controller ESP32 dispenses water when both animal presence and motion are detected, while also monitoring water levels.
 
----
 
 ## Hardware Components
 
@@ -42,7 +39,6 @@ This project utilizes two ESP32 modules in a cooperative system to detect animal
 - **Servo Motor**: Regulates the water valve, allowing refilling when conditions are met.
 - **Power Supply**: Ensures continuous operation of both ESP32 modules and connected sensors.
 
----
 
 ## Code Functionality
 
@@ -55,8 +51,6 @@ This project utilizes two ESP32 modules in a cooperative system to detect animal
   - Receives the animal detection signal from the ESP32-CAM.
   - Monitors the PIR motion sensor and water level sensor.
   - Opens the water valve if an animal is detected, motion is sensed, and the water level is low.
-
----
 
 ## Possible Future Improvements
 

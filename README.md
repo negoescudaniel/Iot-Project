@@ -1,6 +1,6 @@
 # ESP32-CAM with Web Server, MQTT Communication, and Animal Detection Control System
 
-## Project Overview
+## Overview
 
 This project utilizes two ESP32 modules in a cooperative system to detect animals, control a water valve for bowl refilling, and monitor environmental sensors. The system is structured as follows:
 
